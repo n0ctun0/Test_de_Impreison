@@ -1,0 +1,207 @@
+<resources>
+    <string name="app_name">Test de Impresion</string>
+    <string name="consola">Consola de Operaciones</string>
+    <string name="action_settings">Settings</string>
+    <string name="about">About</string>
+
+    <!-- File Browser -->
+    <string name="load">Load</string>
+    <string name="no_directory">No files or directories</string>
+    <string name="back">Back</string>
+    <string name="browse">Browse</string>
+    <string name="filename">filename</string>
+    <string name="current_folder_label">Current Folder:</string>
+    <string name="title_activity_file_explorer">FileExplorerActivity</string>
+
+    <!-- About Menu -->
+    <string name="close_label">Close</string>
+    <string name="version_code_label"> version code: </string>
+    <string name="version_name_label"> version code: </string>
+    <string name="about_company">DMR mil Rollos</string>
+    <string name="about_copyright">" Copyright: 2018"</string>
+    <string name="about_decription_text"> This application prints sample label file to a Datamax-ONeil printer.</string>
+    <string name="app_description">App para visualizar e Imprimir en impresoras Honeywell, Star Micronics, Hprt</string>
+    <string name="image_desc">dmrprintlogo3</string>
+
+    <!-- Main Activity -->
+    <string name="conn_type">Connection Type:</string>
+    <string name="config">Config</string>
+    <string name="connection">Select a communication method:</string>
+    <string name="connection_settings">Connection Settings</string>
+    <string name="connection_not_configured">Connection settings not configured. Please configure connection settings.</string>
+    <string name="print_items">Select an item to print:</string>
+    <string name="query_items">Select an item to query:</string>
+    <string name="printer_mode">Select a printer language:</string>
+    <string name="print">Test</string>
+    <string name="perform_task">Select what to do:</string>
+    <string name="query">Query</string>
+    <string name="printHeadWidth">PrintHead Width:</string>
+    <string-array name="printHeadWidth_array">
+        <item>384 (2 in.)</item>
+        <item>576 (3 in.)</item>
+        <item>832 (4 in.)</item>
+    </string-array>
+
+    <string-array name="connection_array">
+        <item>Bluetooth</item>
+    </string-array>
+
+    <string-array name="printer_mode_array">
+        <item>Esc/Pos</item>
+        <item>StarPRNT</item>
+        <item>Apex</item>
+        <item>Honeywell</item>
+        <item>StarLine</item>
+
+    </string-array>
+
+    <string-array name="print_list_EZ">
+        <item>3-inch Sample Receipt</item>
+        <item>4-inch Sample Receipt</item>
+        <item>Barcode Sample</item>
+    </string-array>
+
+    <string-array name="print_list_LP">
+        <item>3-inch Sample Receipt</item>
+        <item>4-inch Sample Receipt</item>
+        <item>Image Sample</item>
+    </string-array>
+
+    <string-array name="print_list_DPL">
+        <item>Text Sample</item>
+        <item>Incrementing Sample</item>
+        <item>Barcodes Sample</item>
+        <item>Graphics Sample</item>
+        <item>Image Sample</item>
+    </string-array>
+
+    <string-array name="print_list_ExPCL_LP">
+        <item>Text Sample</item>
+        <item>Barcodes Sample</item>
+        <item>Graphics Sample</item>
+    </string-array>
+
+    <string-array name="print_list_ExPCL_PP">
+        <item>Text Sample</item>
+        <item>Barcodes Sample</item>
+        <item>Rectangles Sample</item>
+    </string-array>
+
+    <string-array name="print_list_Esc_pos">
+        <item>Imagen</item>
+
+    </string-array>
+
+
+    <string-array name="query_list_Legacy">
+        <item>Avalanche Settings</item>
+        <item>Battery Condition</item>
+        <item>Bluetooth Config</item>
+        <item>Font List</item>
+        <item>Format List</item>
+        <item>General Config</item>
+        <item>General Status</item>
+        <item>Graphics List</item>
+        <item>IrDA Config</item>
+        <item>Label Config</item>
+        <item>Magnetic Config</item>
+        <item>Magnetic Card Data</item>
+        <item>Manufacturing Date</item>
+        <item>Memory Status</item>
+        <item>Printer Options</item>
+        <item>PrintHead Status</item>
+        <item>Serial Number</item>
+        <item>SmartCard Reader Config</item>
+        <item>Serial Port Config</item>
+        <item>TCP/IP Status</item>
+        <item>Update Data</item>
+        <item>Version Information</item>
+    </string-array>
+
+    <string-array name="query_list_DPL">
+        <item>Printer Information</item>
+        <item>Files and Internal Fonts</item>
+        <item>Media Label</item>
+        <item>Print Control Settings</item>
+        <item>System Settings</item>
+        <item>Sensor Calibration</item>
+        <item>Miscellaneous</item>
+        <item>Serial Port Config</item>
+        <item>Auto Update Settings</item>
+        <item>Avalanche Enabler Settings</item>
+        <item>Bluetooth Config</item>
+        <item>Network General Settings</item>
+        <item>Network Wireless Settings</item>
+        <item>Printer Status</item>
+    </string-array>
+
+    <string-array name="query_list_ExPCL">
+        <item>Battery Condition</item>
+        <item>Bluetooth Config</item>
+        <item>General Status</item>
+        <item>Magnetic Card Data</item>
+        <item>Memory Status</item>
+        <item>Print Head Status</item>
+        <item>Version Information</item>
+    </string-array>
+
+    <!-- Connection Settings -->
+    <string name="title_activity_connection_settings">ConnectionSettingsActivity</string>
+    <string name="Save_Done_Button">Save</string>
+    <string name="enter_mac">Please enter MAC Address:</string>
+    <string name="mac_hint">eg. AB:CD:EF:11:22:33 or ABCDEF112233</string>
+    <string name="enter_ip">Please enter IP Address of printer:</string>
+    <string name="ip_hint">eg. 192.168.99.1</string>
+    <string name="port">Port:</string>
+    <string name="port_hint">eg. 515</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="Cancel_Button">Cancel</string>
+    <string name="select_folder">Select Folder</string>
+    <string name="BT_Button">List BT</string>
+    <string name="BT_app_config_error">Application Error</string>
+    <string name="BT_app_config_error_message">Invalid port format. Please re-enter the port</string>
+    <string name="title_activity_menuprincipal">menuprincipal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+    <string-array name="RUBROS">
+        <item name="N">Todos</item>
+        <item name="15">Accesorios</item>
+        <item name="16">Comestibles</item>
+        <item name="17">Electronica</item>
+        <item name="14">Dermocosmetica</item>
+        <item name="69">Inactivo</item>
+        <item name="1">Farmacia</item>
+        <item name="2">Varios Farmacia</item>
+        <item name="3">Cosmetica</item>
+        <item name="4">Tocador</item>
+        <item name="5">Perfumeria</item>
+        <item name="99">Utiles De Papeleria</item>
+        <item name="7">Cigarros</item>
+        <item name="9">Regalos</item>
+        <item name="8">Peluquería</item>
+        <item name="18">Diarios Y Revistas</item>
+        <item name="19">Librería Y Multimedia</item>
+        <item name="20">Vestimenta</item>
+        <item name="21">Artesanías Y Varios</item>
+        <item name="6">Resonance</item>
+        <item name="22">Limpieza</item>
+        <item name="70">Telefonía</item>
+    </string-array>
+    <string name="title_activity_prueba">prueba</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

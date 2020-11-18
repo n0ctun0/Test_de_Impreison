@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#CF1717</color>
+    <color name="colorPrimaryDark">#3F4850</color>
+    <color name="colorAccent">#F7F9FA</color>
+    <color name="white">#FDFCFC</color>
+    <color name="black">#506667</color>
+    <color name="colorAccents">#FFF47E</color>
+    <color name="colorazul">#E78130</color>
+    <color name="colorrojo">#8D292B</color>
+    <color name="colorrojo2">#AA1414</color>
+    <color name="verde">#43DA4A</color>
+    <color name="btn">#CAAE88</color>
+    <color name="backgroundsr">#2B2B2B</color>
+    <color name="letra">#EC861A</color>
+
+    <color name="primaryColor">#ff5722</color>
+    <color name="primaryLightColor">#FF8A50</color>
+    <color name="primaryDarkColor">#c41c00</color>
+    <color name="secondaryColor">#424242</color>
+    <color name="secondaryLightColor">#6d6d6d</color>
+    <color name="secondaryDarkColor">#1b1b1b</color>
+    <color name="primaryTextColor">#FAFAFA</color>
+    <color name="secondaryTextColor">#f4511e</color>
+
+
+    <color name="azulosinferta">#FF93D8F8</color>
+    <color name="amarilloferta">#FFEEF893</color>
+
+    <color name="azulimpreso">#7C8392</color>
+    <color name="ofertaimpreso">#A1AC79</color>
+</resources>

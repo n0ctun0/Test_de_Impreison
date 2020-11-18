@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:paddingBottom="8dp"
+	android:paddingLeft="8dp"
+	android:paddingRight="8dp"
+	android:paddingTop="8dp">
+
+	<TextView
+	    android:id="@+id/connection_prompt_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/enter_mac" />
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:weightSum="100">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="5" />
+
+		<EditText
+		    android:id="@+id/connection_editText"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="70"
+            android:selectAllOnFocus="true"
+		    android:ems="10"
+		    android:hint="@string/mac_hint"
+		    android:inputType="text" />
+
+
+	</LinearLayout>
+
+	<TextView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+
+	<TextView
+	    android:id="@+id/port_textView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/port" />
+
+	<LinearLayout
+	   android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:weightSum="100">
+
+	    <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="5" />
+
+	    <EditText
+	        android:id="@+id/port_editText"
+	        android:layout_weight="95"
+            android:selectAllOnFocus="true"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:ems="10"
+	        android:hint="@string/port_hint"
+	        android:inputType="number" />
+	</LinearLayout>
+	
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:weightSum="100">
+
+		<Button
+			android:id="@+id/save_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="5dp"
+			android:layout_marginRight="5dp"
+			android:layout_weight="50"
+			android:background="@drawable/btn_fondo_color"
+			android:text="@string/Save_Done_Button"
+			android:textColor="@color/white" />
+
+		<Button
+			android:id="@+id/cancel_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="50"
+			android:background="@drawable/btn_fondo_color"
+			android:text="@string/Cancel_Button"
+			android:textColor="@color/white" />
+	</LinearLayout>
+
+
+	<RadioGroup
+		android:id="@+id/rdgListaAPEX"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:visibility="visible"
+		tools:visibility="gone">
+
+		<RadioButton
+			android:id="@+id/rdbAPEX3taller"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="APEX3 taller" />
+
+		<RadioButton
+			android:id="@+id/rdbAPEX4taller"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="APEX4 taller" />
+
+		<RadioButton
+			android:id="@+id/rdbAPEX3cousa"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="APEX3 cousa" />
+
+		<RadioButton
+			android:id="@+id/rdbAPEX4cousa"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="APEX4 cousa" />
+	</RadioGroup>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/listaHeader"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Lista de Dispositivos BT Vinculados"
+			android:textSize="18sp"
+			android:textStyle="bold" />
+
+		<ListView
+
+			android:id="@+id/listaDispositivosBT"
+			android:layout_width="match_parent"
+			android:layout_height="165dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginTop="5dp" />
+
+		<Button
+			android:id="@+id/refresh_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/btn_fondo_color2"
+			android:text="Refrescar Lista"
+			android:textColor="@color/white" />
+
+	</LinearLayout>
+</LinearLayout>

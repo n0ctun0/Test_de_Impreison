@@ -1,0 +1,164 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fileview_main_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical" >
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_browse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/actionBarSize"
+        app:navigationContentDescription="@string/abc_action_bar_up_description"
+        android:background="@color/btn"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/app_name"
+        />
+    <LinearLayout
+        android:id="@+id/button_control_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/btn" >
+
+        <Button
+            android:id="@+id/back_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_fondo_color"
+            android:text="@string/back"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/select_folder_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_fondo_color"
+            android:text="@string/select_folder"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@color/white" />
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/new_folder_button"-->
+            <!--android:src="@drawable/add_folder_32"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background = "?android:attr/selectableItemBackground"-->
+            <!--android:contentDescription="@string/newfolder"-->
+            <!--style="?android:attr/buttonBarButtonStyle" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/new_button"-->
+            <!--android:src="@drawable/add_file_32"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background = "?android:attr/selectableItemBackground"-->
+            <!--android:contentDescription="@string/newfile"-->
+            <!--style="?android:attr/buttonBarButtonStyle" />-->
+
+
+        <!--<Button-->
+            <!--android:id="@+id/back_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/custom_button_selector"-->
+            <!--android:textColor="@drawable/custom_button_text_color"-->
+            <!--android:text="@string/back"-->
+            <!--style="?android:attr/buttonBarButtonStyle" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/select_folder_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/custom_button_selector"-->
+            <!--android:textColor="@drawable/custom_button_text_color"-->
+            <!--android:text="@string/select_folder"-->
+            <!--style="?android:attr/buttonBarButtonStyle" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/new_folder_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background = "?android:attr/selectableItemBackground"-->
+            <!--android:textColor="@drawable/custom_button_text_color"-->
+            <!--android:text="@string/newfolder"-->
+            <!--style="?android:attr/buttonBarButtonStyle"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/new_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background = "?android:attr/selectableItemBackground"-->
+            <!--android:textColor="@drawable/custom_button_text_color"-->
+            <!--android:text="@string/newfile"-->
+            <!--style="?android:attr/buttonBarButtonStyle"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/currentfolder_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/current_folder_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_folder_label" />
+
+        <TextView
+            android:id="@+id/current_folder_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="10dp"
+        android:longClickable="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+    </ListView>
+
+</LinearLayout>
