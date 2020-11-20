@@ -323,17 +323,17 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
 
 
     private void PrintBmpTsc() {
-        int heigt = 150;
+
+        final int heigth_calculator,wigth_calculator;
+
         try {
 
-            //funciona no duplica la imagen
+            mBitmap = generateImageFromPdf(pathpdf, 0, 576, m_printerMode);
+            heigth_calculator = (int) (mBitmap.getHeight()/8);
+            wigth_calculator = (int) (mBitmap.getWidth()/8);
 
-            mBitmap = generateImageFromPdf(pathpdf, 0, 500, m_printerMode);
-            heigt = mBitmap.getHeight();
             File f = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/" + "/temp2.BMP");
-
             byte[] bitmapData = convertTo1BPP(mBitmap, 128);
-
             ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
 
                 InputStream is = bs;
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                 fos.write(buffer);
                 fos.close();
 
-                Thread thread = new Thread() {
+            Thread thread = new Thread() {
                     @Override
                     public void run() {
                         try {
@@ -353,13 +353,11 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                             EnableDialog(true, "Enviando Documento...",true);
                             TscDll.openport(m_printerMAC);
                             TscDll.downloadbmp("temp2.BMP");
-                            TscDll.setup(70, 200, 2, 0, 0, 0, 0);
+                            TscDll.setup(wigth_calculator, heigth_calculator, 4, 0, 0, 0, 0);
                             TscDll.clearbuffer();
                             TscDll.sendcommand("PUTBMP 10,10,\"temp2.BMP\"\n");
                             TscDll.printlabel(1, 1);
                             TscDll.closeport(5000);
-
-
 
                             EnableDialog(false, "Enviando terminando...",false);
 
