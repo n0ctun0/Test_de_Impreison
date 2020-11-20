@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
     static final String FOLDER_NAME_KEY = "com.honeywell.doprint.Folder_Name_Key";
     static final String FOLDER_PATH_KEY = "com.honeywell.doprint.Folder_Path_Key";
 
-
     TSCActivity TscDll = new TSCActivity();
 
     @Override
@@ -324,18 +323,16 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
 
 
     private void PrintBmpTsc() {
-
+        int heigt = 150;
         try {
 
             //funciona no duplica la imagen
 
             mBitmap = generateImageFromPdf(pathpdf, 0, 500, m_printerMode);
-
+            heigt = mBitmap.getHeight();
             File f = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/" + "/temp2.BMP");
 
             byte[] bitmapData = convertTo1BPP(mBitmap, 128);
-
-           // Bitmap bipmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
 
             ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
 
@@ -356,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                             EnableDialog(true, "Enviando Documento...",true);
                             TscDll.openport(m_printerMAC);
                             TscDll.downloadbmp("temp2.BMP");
-                            TscDll.setup(70, 150, 4, 4, 0, 0, 0);
+                            TscDll.setup(70, 200, 2, 0, 0, 0, 0);
                             TscDll.clearbuffer();
                             TscDll.sendcommand("PUTBMP 10,10,\"temp2.BMP\"\n");
                             TscDll.printlabel(1, 1);
@@ -384,8 +381,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
     }
 
     private void PrintPdfZebraAlpha() {
-
-
 
             /*
             File f = new File(getCacheDir() + "/tempp.pdf");
@@ -417,6 +412,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                             Looper.prepare();
                             Connection connection = new BluetoothConnection(m_printerMAC);
                             connection.open();
+
                             ZebraImageAndroid imagenandroid = new ZebraImageAndroid(bitt);
 
                             int var2 = 0;
@@ -427,9 +423,17 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
 
                                 ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
                                 String var10 = "! 0 200 200 " + imagenandroid.getHeight() + " 1\r\n";
-                                String var11 = "PRINT\r\n";
 
+                                String contrast = "CONTRAST 0\r\n";
+                                String tone = "TONE 0\r\n";
+                                String speed = "SPEED 3\r\n";
+
+                                outputstream.write(contrast.getBytes());
+                                outputstream.write(tone.getBytes());
+                                outputstream.write(speed.getBytes());
                                 outputstream.write(var10.getBytes());
+
+
                                 outputstream.write("CG ".getBytes());
                                 outputstream.write(String.valueOf(AnchoTotal).getBytes());
                                 outputstream.write(" ".getBytes());
@@ -441,15 +445,17 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                                 outputstream.write(" ".getBytes());
 
                                 connection.write(outputstream.toByteArray());
+
                                 PrinterConnectionOutputStream var12 = new PrinterConnectionOutputStream(connection);
                                 CompressedBitmapOutputStreamCpcl var13 = new CompressedBitmapOutputStreamCpcl(var12);
                                 DitheredImageProvider.getDitheredImage(imagenandroid, var13);
-
 
                                 var13.close();
                                 var12.close();
 
                                 connection.write("\r\n".getBytes());
+
+                                String var11 = "PRINT\r\n";
                                 connection.write(var11.getBytes());
 
 
