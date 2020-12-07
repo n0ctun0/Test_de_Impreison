@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
     private TextView txtsucursal,txtpathpdf;
     private String password;
     private Button btnbluetooth;
-    private Button btnTagSml300, btnPdfZebraAlpha, btnBmpTsc, btnZebraSdk, btnbuscarpdf;
+    private Button btnTagSml300, btnPdfZebraAlpha, btnBmpTsc, btnbuscarpdf,btn_MPD31,btn_gondolatsc;
     private Button btnPdfR410;
     private SharedPreferences sharedPref;
     private int m_printerPort = 515;
@@ -125,10 +125,8 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCancelable(false);
 
-
-
         txtpathpdf = findViewById(R.id.txtpathpdff);
-
+        txtpathpdf.setText("seleccionarpdf");
 
         textbluetooth = findViewById(R.id.txtbluetooth);
 
@@ -138,6 +136,25 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DOPrintMainActivity.class);
                 startActivity(intent);
+            }
+        });
+        btn_gondolatsc = findViewById(R.id.btngondolatsc);
+        btn_gondolatsc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TagGondolaTsc.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        btn_MPD31 = findViewById(R.id.btnMPD31);
+        btn_MPD31.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PrintPD31();
             }
         });
 
@@ -156,7 +173,12 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
             @Override
             public void onClick(View v) {
 
-                PrintPdfZebraAlpha();
+                if (valdiarpdf()){
+                    PrintPdfZebraAlpha();
+                }else{
+                    Toast.makeText(MainActivity.this, "Seleccione un documento pdf", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -165,7 +187,14 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
         btnPdfR410.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrintPdfR410();
+
+
+                if (valdiarpdf()){
+                    PrintPdfR410();
+                }else{
+                    Toast.makeText(MainActivity.this, "Seleccione un documento pdf", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -175,19 +204,17 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
             @Override
             public void onClick(View v) {
 
-                PrintBmpTsc();
-            }
-        });
 
-        btnZebraSdk = findViewById(R.id.btn_zebra_sdk);
-        btnZebraSdk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                PrintZebraSdk();
+                if (valdiarpdf()){
+                    PrintBmpTsc();
+                }else{
+                    Toast.makeText(MainActivity.this, "Seleccione un documento pdf", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
+
 
         btnbuscarpdf = findViewById(R.id.btnPDF);
 
@@ -215,50 +242,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
             bxlConfigLoader.openFile();
         } catch (Exception e) {
             bxlConfigLoader.newFile();
-        }
-    }
-
-    private void PrintZebraSdk() {
-        Log.i("Entrando", "sendPrint()");
-        Connection connection = new BluetoothConnection(m_printerMAC);
-        String snackbarMsg = "";
-
-        try {
-            connection.open();
-            ZebraPrinter printer = ZebraPrinterFactory.getInstance(connection);
-
-            boolean isReady = true;
-            String scale = "dither scale-to-fit";
-            double scaleFactor;
-
-            try {
-
-                file = new File(getCacheDir() + "/temp.pdf");
-                if (!file.exists()) {
-                    InputStream is = getAssets().open("ejemplo.pdf");
-                    int size = is.available();
-                    byte[] buffer = new byte[size];
-                    is.read(buffer);
-                    is.close();
-                    FileOutputStream fos = new FileOutputStream(file);
-                    fos.write(buffer);
-                    fos.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-        } catch (ConnectionException e) {
-            e.printStackTrace();
-        } catch (ZebraPrinterLanguageUnknownException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-            } catch (ConnectionException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -478,7 +461,49 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
 
     }
 
+    private void PrintPD31() {
 
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+
+                    EnableDialog(true, "Enviando Documento...",true);
+                    TscDll.openport(m_printerMAC);
+                   //TscDll.setup(500, 500, 4, 0, 0, 0, 0);
+
+                    TscDll.sendcommand(
+                            "!ETSC ESC/POS Ticket"+"\r\n"+
+                            "! E 3040 Saturn Street Suite #200. Brea, CA 92821"+"\r\n"+
+                            "E-2Comestibles-0"+"\r\n"+
+                            "E"+"\r\n"+
+                            "Bananas	   $2.99/LB  "+"\r\n"+
+                            "Manzanas	   $1.99/LB  "+"\r\n"+
+                            "Zanahorias	   $0.99/LB  "+"\r\n"+
+                            "E-2CarnesE -0      "+"\r\n"+
+                            "Chuletón	   $9.99/LB  "+"\r\n"+
+                            "Filete	   $8.99/LB      "+"\r\n"+
+                            "ESubtotal	  $24.95 "+"\r\n"+
+                            "Imp. (9%)	   $2.25     "+"\r\n"+
+                            "                        "+"\r\n"
+                    );
+
+                    TscDll.printlabel(1, 1);
+                    TscDll.closeport(5000);
+
+                    EnableDialog(false, "Enviando terminando...",false);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    EnableDialog(false, "Enviando terminando...",false);
+                }
+            }
+        };
+
+        thread.start();
+
+
+    }
 
     private void PrintPdfR410() {
 
@@ -882,6 +907,20 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
                 }
                 break;
             }
+    }
+
+
+    boolean valdiarpdf(){
+        boolean exist = false;
+        if (txtpathpdf.getText().equals("seleccionarpdf")){
+
+            exist = false;
+        }else{
+            exist = true;
+        }
+
+
+        return exist;
     }
 
 }

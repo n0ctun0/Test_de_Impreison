@@ -60,12 +60,20 @@
                 android:textColor="@color/white" />
 
             <Button
+                android:id="@+id/btngondolatsc"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_fondo_color4"
+                android:text="Tag Gondola Alpha3" />
+
+            <Button
                 android:id="@+id/btn_tag_sml300"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_fondo_color4"
-                android:text="Gondola Star SM L300" />
+                android:text="Tag Gondola Star SM L300" />
 
             <Button
                 android:id="@+id/btn_pdf_r410"
@@ -81,7 +89,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_fondo_color4"
-                android:text="PDF ZEBRA TO ALPHA3" />
+                android:text="PDF CPCL A  ALPHA3" />
 
             <Button
                 android:id="@+id/btn_bmp_tsc"
@@ -89,15 +97,15 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_fondo_color4"
-                android:text="BMP TSC" />
+                android:text="PDF TSC ALPHA3" />
 
             <Button
-                android:id="@+id/btn_zebra_sdk"
+                android:id="@+id/btnMPD31"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_fondo_color4"
-                android:text="Zebra SDK " />
+                android:text="EJEMPLO ESCPOS MPD31" />
 
         </LinearLayout>
     </ScrollView>
