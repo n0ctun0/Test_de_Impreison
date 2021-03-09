@@ -19,8 +19,10 @@ import android.widget.Toast;
 import com.example.test_de_impreison.Adapter.ProductoAdapter;
 import com.example.test_de_impreison.BaseDatos.ProductosDB;
 import com.example.test_de_impreison.Clase.Producto;
+import com.example.test_de_impreison.Clase.Producto2;
 import com.example.test_de_impreison.configuracion.DMRPrintSettings;
 import com.example.test_de_impreison.sdkstar.Communication;
+import com.google.gson.Gson;
 import com.starmicronics.stario.StarPrinterStatus;
 import com.starmicronics.starioextension.ICommandBuilder;
 import com.starmicronics.starioextension.StarIoExt;
@@ -58,6 +60,10 @@ import okhttp3.Response;
 
 
 public class TagGondola extends AppCompatActivity {
+
+    String ultimocodigo;
+    private OkHttpClient Pickinghttp;
+    private Request RequestPicking;
 
     ConnectionBase conn = null;
     String ApplicationConfigFilename = "applicationconfigg.dat";
@@ -105,8 +111,18 @@ public class TagGondola extends AppCompatActivity {
         btnagregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarproducto();
-            }
+                //cargarproducto();
+
+                String a = "{\n" +
+                        "\"Codigo\": \"250490000\",\n" +
+                        "\"Nombre\": \"YERBA COMPUESTA SERENA CANARIA 1.00 K\",\n" +
+                        "\"Moneda\": \"moneda\",\n" +
+                        "\"Precio\": \"195.00\",\n" +
+                        "\"CodBarras\": \"7730241010294\",\n" +
+                        "\"Prioridad\": \"C\",\n" +
+                        "\"Aux\": \"\"\n" +
+                        "}";
+                cargarproductojson(a);        }
         });
 
         btnprintall = findViewById(R.id.btnimprimirall);
@@ -185,12 +201,26 @@ public class TagGondola extends AppCompatActivity {
         }
     }
 
-    String ultimocodigo;
-    private OkHttpClient Pickinghttp;
-    private Request RequestPicking;
+    private void cargarproductojson(String response) {
 
 
-    public void imprimirCodigo(final String codigoverificar) {
+        Gson g = new Gson();
+
+        Producto2 p = g.fromJson(response, Producto2.class);
+
+
+        Log.d("TAG1111", p.getCodBarras());
+        //db = new ProductosDB(TagGondola.this);
+
+        //db.insertarProducto(p);
+        cargarLista();
+    }
+
+
+
+
+
+    public void requesthttptest(final String codigoverificar) {
 
         runOnUiThread(new Runnable() {
             @Override
@@ -226,21 +256,26 @@ public class TagGondola extends AppCompatActivity {
                         public void onResponse(Call call, final Response response) throws IOException {
 
                             if (response.isSuccessful()) {
+
                                 try {
 
                                     final String myResponse = response.body().string();
 
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                    Gson g = new Gson();
 
+                                    Producto p = g.fromJson(myResponse, Producto.class);
+
+                                } catch (IOException e) {
+
+                                    e.printStackTrace();
+
+                                }
                                 //cerrar dialog
 
                             } else {
 
                                //error conexion
                                 //cerrar dialog
-
 
                             }
                         }

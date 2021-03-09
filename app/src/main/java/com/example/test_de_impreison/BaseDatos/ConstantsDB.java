@@ -2,8 +2,8 @@ package com.example.test_de_impreison.BaseDatos;
 
 public class ConstantsDB {
     //General
-    public static final String DB_NAME = "sanroque12.db";
-    public static final int DB_VERSION = 12;
+    public static final String DB_NAME = "sanroque13.db";
+    public static final int DB_VERSION = 13;
 
     //TABLA PRODUCTOS
 
