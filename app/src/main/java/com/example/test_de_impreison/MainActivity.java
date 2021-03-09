@@ -204,8 +204,6 @@ public class MainActivity extends AppCompatActivity implements Runnable, OutputC
             @Override
             public void onClick(View v) {
 
-
-
                 if (valdiarpdf()){
                     PrintBmpTsc();
                 }else{

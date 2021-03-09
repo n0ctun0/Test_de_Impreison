@@ -25,6 +25,12 @@ import com.starmicronics.stario.StarPrinterStatus;
 import com.starmicronics.starioextension.ICommandBuilder;
 import com.starmicronics.starioextension.StarIoExt;
 
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +38,23 @@ import java.io.ObjectInputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import honeywell.connection.ConnectionBase;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class TagGondola extends AppCompatActivity {
@@ -148,6 +170,7 @@ public class TagGondola extends AppCompatActivity {
     }
 
 
+
     private void cargarproducto(){
 
         try {
@@ -160,7 +183,77 @@ public class TagGondola extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("errorXMLA", "mensaje");
         }
+    }
 
+    String ultimocodigo;
+    private OkHttpClient Pickinghttp;
+    private Request RequestPicking;
+
+
+    public void imprimirCodigo(final String codigoverificar) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                final String codigocaptrado = codigoverificar;
+
+                if (!ultimocodigo.equals(codigocaptrado)) {
+
+                    Pickinghttp = new OkHttpClient();
+                    MediaType mediaType = MediaType.parse("text/xml");
+
+                    RequestBody body = RequestBody.create(mediaType, "");
+
+                    RequestPicking = new Request.Builder()
+                            .url("https://precioonline.tata.com.uy/articulos.php?tipocodigo=2&codigo=7730241010294")
+                            .method("POST", body)
+                            .addHeader("Content-Type", "application/json")
+                            .build();
+
+                    //cancelar dialog
+
+                    Pickinghttp.newCall(RequestPicking).enqueue(new Callback() {
+
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                            //cancelar dialog
+                            //conexion fallo
+                        }
+
+                        @Override
+                        public void onResponse(Call call, final Response response) throws IOException {
+
+                            if (response.isSuccessful()) {
+                                try {
+
+                                    final String myResponse = response.body().string();
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                //cerrar dialog
+
+                            } else {
+
+                               //error conexion
+                                //cerrar dialog
+
+
+                            }
+                        }
+
+                    });
+
+                } else {
+                   //ya consulto este codigo
+                }
+
+            }
+
+        });
 
     }
 
@@ -180,7 +273,7 @@ public class TagGondola extends AppCompatActivity {
         ICommandBuilder builder = StarIoExt.createCommandBuilder(StarIoExt.Emulation.StarPRNTL);
 
         builder.beginDocument();
-        builder.appendTopMargin(6);
+       // builder.appendTopMargin(1);
         builder.appendCodePage(ICommandBuilder.CodePageType.CP437);
 
         //*********************************
@@ -195,7 +288,7 @@ public class TagGondola extends AppCompatActivity {
 
 
         builder.appendAbsolutePosition(codigointerno,10);
-        builder.appendMultiple(3, 3);
+        builder.appendMultiple(2, 3);
         builder.appendAbsolutePosition(precio,250);
         builder.appendLineFeed();
 
@@ -220,10 +313,6 @@ public class TagGondola extends AppCompatActivity {
         Charset encoding = Charset.forName("CP437");
 
         ICommandBuilder builder = StarIoExt.createCommandBuilder(StarIoExt.Emulation.StarPRNTL);
-        builder.beginDocument();
-
-        builder.appendCodePage(ICommandBuilder.CodePageType.CP437);
-
         for (Producto prod : list) {
 
             byte[] nombreproducto= (prod.getDescArticulo_1()).getBytes(encoding);
@@ -233,7 +322,7 @@ public class TagGondola extends AppCompatActivity {
             byte[] codigobarra = "1234567895215".getBytes();
 
             builder.beginDocument();
-            builder.appendTopMargin(6);
+            builder.appendTopMargin(1);
             builder.appendCodePage(ICommandBuilder.CodePageType.CP437);
 
             //*********************************
@@ -248,7 +337,7 @@ public class TagGondola extends AppCompatActivity {
 
 
             builder.appendAbsolutePosition(codigointerno,10);
-            builder.appendMultiple(3, 3);
+            builder.appendMultiple(2, 3);
             builder.appendAbsolutePosition(precio,250);
             builder.appendLineFeed();
 
